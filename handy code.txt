@@ -1,0 +1,99 @@
+// class MenuState extends State<Menu> {
+//   bool _initialized = false;
+//   bool _error = false;
+//   List<String> names = [];
+//
+//   Future<void> initializeFlutterFire() async {
+//     try {
+//       // Wait for Firebase to initialize and set `_initialized` state to true
+//       await Firebase.initializeApp();
+//       FirebaseFirestore.instance.collection('menu')
+//           .where('available', isNotEqualTo: false).get().then((
+//           QuerySnapshot snaps) {
+//         names = snaps.docs.map((e) {
+//           return e.data()['name'].toString();
+//         }).toList();
+//       });
+//       if(names.isNotEmpty){
+//         setState(() {
+//           _initialized = true;
+//         });
+//       }
+//
+//     } catch (e) {
+//       // Set `_error` state to true if Firebase initialization fails
+//       setState(() {
+//         _error = true;
+//       });
+//     }
+//   }
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     initializeFlutterFire();
+//   }
+//
+//   geticon(String name) {
+//     if (name == 'Breakfast') {
+//       return Icon(Icons.breakfast_dining_outlined, size: 50);
+//     }
+//     if (name == 'Fastfood') {
+//       return Icon(Icons.fastfood_outlined, size: 50);
+//     }
+//     if (name == 'Lunch' || name == 'Dinner') {
+//       return Icon(Icons.restaurant, size: 50);
+//     }
+//   }
+//
+//   itemsnumbers() {
+//     int numbers = 0;
+//     setState(() {
+//       numbers = names.length;
+//     });
+//     return numbers;
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // if(_error){
+//     //
+//     // }
+//
+//     if(_initialized){
+//       return MaterialApp(
+//           home: Scaffold(
+//               appBar: AppBar(
+//                 title: Text('Menu'),
+//               ),
+//               body: Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+//                 child: ListView.builder(
+//                     shrinkWrap: true,
+//                     padding: const EdgeInsets.all(5.5),
+//                     itemCount: itemsnumbers(),
+//                     itemBuilder: (context, index) {
+//                       return InkWell(
+//                         splashColor: Colors.blue,
+//                         child: Card(
+//                             elevation: 5,
+//                             child: Column(
+//                               children: <Widget>[
+//                                 ListTile(
+//                                   leading: geticon(names.elementAt(index)),
+//                                   title: Text(names.elementAt(index)),
+//                                   subtitle: Text(
+//                                       'Tap to see items on ${names.elementAt(index)} Menu'),
+//                                 ),
+//                               ],
+//                             )),
+//                         onTap: () {
+//                           print(names.elementAt(index));
+//                         },
+//                       );
+//                     }),
+//               )));
+//     }
+//     return Loading();
+//   }
+// }
